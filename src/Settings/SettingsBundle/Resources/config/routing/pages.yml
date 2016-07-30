@@ -1,0 +1,35 @@
+admin_pages:
+    pattern:  /
+    defaults: { _controller: "SettingsBundle:PagesAdmin:index" }
+
+admin_pages_sort:
+    pattern:  /{field}/{type}/sort
+    defaults: { _controller: "SettingsBundle:PagesAdmin:sort" }
+    requirements: { type: ASC|DESC }
+
+admin_pages_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SettingsBundle:PagesAdmin:show" }
+
+admin_pages_new:
+    pattern:  /new
+    defaults: { _controller: "SettingsBundle:PagesAdmin:new" }
+
+admin_pages_create:
+    pattern:  /create
+    defaults: { _controller: "SettingsBundle:PagesAdmin:create" }
+    requirements: { _method: post }
+
+admin_pages_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SettingsBundle:PagesAdmin:edit" }
+
+admin_pages_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SettingsBundle:PagesAdmin:update" }
+    requirements: { _method: post|put }
+
+admin_pages_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SettingsBundle:PagesAdmin:delete" }
+    requirements: { _method: post|delete }

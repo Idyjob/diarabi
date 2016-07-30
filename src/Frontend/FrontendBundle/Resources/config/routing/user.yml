@@ -1,0 +1,35 @@
+admin_users:
+    pattern:  /
+    defaults: { _controller: "FrontendBundle:UserAdmin:index" }
+
+admin_users_sort:
+    pattern:  /{field}/{type}/sort
+    defaults: { _controller: "FrontendBundle:UserAdmin:sort" }
+    requirements: { type: ASC|DESC }
+
+admin_users_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FrontendBundle:UserAdmin:show" }
+
+admin_users_new:
+    pattern:  /new
+    defaults: { _controller: "FrontendBundle:UserAdmin:new" }
+
+admin_users_create:
+    pattern:  /create
+    defaults: { _controller: "FrontendBundle:UserAdmin:create" }
+    requirements: { _method: post }
+
+admin_users_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FrontendBundle:UserAdmin:edit" }
+
+admin_users_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FrontendBundle:UserAdmin:update" }
+    requirements: { _method: post|put }
+
+admin_users_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FrontendBundle:UserAdmin:delete" }
+    requirements: { _method: post|delete }

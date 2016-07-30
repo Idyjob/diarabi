@@ -1,0 +1,23 @@
+frontend_admin_medias:
+    resource: "@FrontendBundle/Resources/config/routing/media.yml"
+    prefix:   /admin/medias
+
+frontend_admin_groups:
+    resource: "@FrontendBundle/Resources/config/routing/group.yml"
+    prefix:   /admin/groups
+
+frontend_admin_users:
+    resource: "@FrontendBundle/Resources/config/routing/user.yml"
+    prefix:   /admin/users
+
+homepage:
+    path:     /
+    defaults: { _controller: FrontendBundle:Default:index }
+
+locale_language:
+    path:     locale/{locale}
+    defaults: { _controller: FrontendBundle:Language:locale }
+    #schemes:  [https]
+admin_homepage:
+    path:     /admin
+    defaults: { _controller: FrontendBundle:Admin:index }

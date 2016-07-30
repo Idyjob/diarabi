@@ -1,0 +1,41 @@
+{% extends "::/layout/layoutadmin.html.twig" %}
+
+
+
+
+
+{% block body %}
+    <h1>membres connectés</h1>
+
+
+
+    <table class="table table-striped table-hover table-bordered records_list">
+        <thead>
+            <tr>
+
+
+
+                <th>connectés</th>
+                <th>en ligne</th>
+
+            </tr>
+        </thead>
+        <tbody>
+          {% if users|length >0 %}
+            {% for user in users %}
+                <tr>
+
+                    <td> <a href="{{ path('admin_users_show', {id: user.id}) }}">{{ user.username }}</a></td>
+                    <td><img  src="{{asset('img/connected.png')}}" class="img-responsive" height="20" width="20" /></td>
+                   
+                </tr>
+            {% endfor %}
+            {%else%}
+            <p>Personne n'est connectée</p>
+            {%endif%}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

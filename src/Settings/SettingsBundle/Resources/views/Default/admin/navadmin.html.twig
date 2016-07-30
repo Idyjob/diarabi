@@ -1,0 +1,101 @@
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{{path('admin_homepage')}}">Administration</a>
+</div>
+<ul class="nav navbar-nav">
+
+
+
+
+  <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user" aria-hidden="true"></i> Moi
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{path('homepage')}}">Retour au site</a></li>
+          <li><a href="{{path('fos_user_security_logout')}}">{{ 'logout'|trans}}</a></li>
+          <li><a href="#">{{ 'profile'|trans}}</a></li>
+
+          <li>
+            <a href="{{ path('locale_language', {'locale': 'en'}) }}">{{ 'english'|trans }}</a>
+          </li>
+          <li>
+              <a href="{{ path('locale_language', {'locale': 'fr'}) }}">{{ 'french'|trans }}</a>
+          </li>
+        </ul>
+      </li>
+</ul>
+
+
+<!-- Top Menu Items -->
+
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+      <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#member"><i class="fa fa-user" aria-hidden="true"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="member" class="collapse">
+              <li>
+                  <a href="{{path('admin_homepage')}}">Membres connectés</a>
+              </li>
+              <li>
+                  <a href="{{ path('admin_users') }}">tous les membres</a>
+              </li>
+              <li>
+                  <a href="{{ path('admin_users_new') }}">Nouveau membre</a>
+              </li>
+          </ul>
+      </li>
+
+      <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#groups"><i class="fa fa-group"></i> Groupes <i class="fa fa-fw fa-caret-down"></i> </a>
+          <ul id="groups" class="collapse">
+
+              <li>
+                  <a href="{{ path('admin_groups') }}">tous les Roles</a>
+              </li>
+              <li>
+                  <a href="{{ path('admin_groups_new') }}">Nouveau role</a>
+              </li>
+          </ul>
+      </li>
+
+
+
+      <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#pages"><i class="fa fa-fw fa-bar-chart-o" aria-hidden="true"></i> Conditions générales <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="pages" class="collapse">
+            <li>
+                <a href="{{ path('admin_pages') }}"><i class="fa fa-fw fa-bar-chart-o"></i> liste des règles</a>
+            </li>
+
+              <li>
+                  <a href="{{ path('admin_pages_new') }}">créer une nouvelle</a>
+              </li>
+          </ul>
+      </li>
+
+      <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#medias"><i class="fa fa-camera-retro" aria-hidden="true"></i> videos/photos <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="medias" class="collapse">
+            <li>
+                <a href="{{ path('admin_medias') }}"><i class="fa fa-fw fa-bar-chart-o"></i> medias</a>
+            </li>
+
+              <li>
+                  <a href="{{ path('admin_medias_new') }}">créer un nouveau</a>
+              </li>
+          </ul>
+      </li>
+
+
+
+
+    </ul>
+</div>
+<!-- /.navbar-collapse -->

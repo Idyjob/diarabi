@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+
+
+       <div class="accordion-body collapse in timeline col-sm-7">
+           <h2>Mes informations</h2>
+           <div id="collapseOne" class="accordion-body collapse in">
+               <div class="accordion-inner">
+
+                   <div class="col-sm-4">
+                       <h4>Modifier mes informations</h4>
+                       <form>
+                         <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+                         <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>

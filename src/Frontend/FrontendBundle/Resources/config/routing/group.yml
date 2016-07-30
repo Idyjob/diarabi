@@ -1,0 +1,35 @@
+admin_groups:
+    pattern:  /
+    defaults: { _controller: "FrontendBundle:GroupAdmin:index" }
+
+admin_groups_sort:
+    pattern:  /{field}/{type}/sort
+    defaults: { _controller: "FrontendBundle:GroupAdmin:sort" }
+    requirements: { type: ASC|DESC }
+
+admin_groups_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FrontendBundle:GroupAdmin:show" }
+
+admin_groups_new:
+    pattern:  /new
+    defaults: { _controller: "FrontendBundle:GroupAdmin:new" }
+
+admin_groups_create:
+    pattern:  /create
+    defaults: { _controller: "FrontendBundle:GroupAdmin:create" }
+    requirements: { _method: post }
+
+admin_groups_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FrontendBundle:GroupAdmin:edit" }
+
+admin_groups_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FrontendBundle:GroupAdmin:update" }
+    requirements: { _method: post|put }
+
+admin_groups_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FrontendBundle:GroupAdmin:delete" }
+    requirements: { _method: post|delete }
