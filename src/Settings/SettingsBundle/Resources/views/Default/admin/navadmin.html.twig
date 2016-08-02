@@ -86,9 +86,40 @@
             <li>
                 <a href="{{ path('admin_medias') }}"><i class="fa fa-fw fa-bar-chart-o"></i> medias</a>
             </li>
+            <li>
+                <a href="{{ path('admin_medias_photos') }}"><i class="fa fa-picture-o" aria-hidden="true"></i> photos</a>
+            </li>
+            <li>
+                <a href="{{ path('admin_medias_videos') }}"><i class="fa fa-video-camera" aria-hidden="true"></i> videos</a>
+            </li>
 
               <li>
                   <a href="{{ path('admin_medias_new') }}">créer un nouveau</a>
+              </li>
+          </ul>
+      </li>
+
+      <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#event"><i class="fa fa-calendar" aria-hidden="true"></i> Evenements <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="event" class="collapse">
+            <li>
+                <a href="{{ path('admin_medias') }}"><i class="fa fa-fw fa-bar-chart-o"></i>tous les evenements</a>
+            </li>
+
+              <li>
+                  <a href="{{ path('admin_medias_new') }}">programmer un évenement</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#pub"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Publications ok <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="pub" class="collapse">
+            <li>
+                <a href="{{ path('admin_articles') }}"><i class="fa fa-fw fa-bar-chart-o"></i>toutes les pubs</a>
+            </li>
+
+              <li>
+                  <a href="{{ path('admin_articles_new') }}">créer une pub</a>
               </li>
           </ul>
       </li>

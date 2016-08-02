@@ -1,0 +1,67 @@
+{% extends "::/layout/layoutadmin.html.twig" %}
+
+{% form_theme form 'FrontendBundle:Form:bootstrap_3_layout.html.twig' %}
+
+{% block title %}{{ '%entity% creation'|trans({'%entity%': 'Article'}, 'admin') }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ '%entity% creation'|trans({'%entity%': 'Article'}, 'admin') }}</h1>
+    {%
+   form_theme form
+       'FrontendBundle::jquery.collection.html.twig'
+
+  %}
+    <form action="{{path('admin_articles_create')}}" method="post" {{form_enctype(form)}}>
+
+
+
+
+        {{ form_widget(form) }}
+
+        <!-- <p>  <li>
+          <a href="#" class="medias_add">
+              Ajouter un autre media
+          </a>
+        </li></p> -->
+
+        <p>
+            <button class="btn btn-primary" type="submit">{{ 'Create'|trans({}, 'admin') }}</button>
+        </p>
+
+  </form>
+
+
+        <div class="btn-group record_actions">
+
+            <a class="btn btn-info" href="{{ path('admin_articles') }}">
+                <i class="fa fa-list"></i> {{ 'Back to the list'|trans({}, 'admin') }}
+            </a>
+
+
+        </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+
+
+
+$().ready(function(){
+
+
+
+  $('.mediacollection').collection({
+           up: '<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span></a>',
+           down: '<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a>',
+           add: '<a href="#" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus-sign"> ajouter</span></a>',
+           remove: '<a href="#" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"> annuler</span></a>'
+  });
+});
+
+</script>
+
+{% endblock %}

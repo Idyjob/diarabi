@@ -21,51 +21,69 @@
 
 
 {% block body %}
-    <h1>{{ '%entity% list'|trans({'%entity%': 'Media'}, 'admin') }}</h1>
+
 
     {% include 'FrontendBundle:Media:filter.html.twig' with {form: form} %}
 
-    <table class="table table-striped table-hover table-bordered records_list">
-        <thead>
-            <tr>
+    <div class="panel panel-default">
+ <div class="panel-heading">{{ '%entity% list'|trans({'%entity%': 'Media'}, 'admin') }}</div>
+ <div class="panel-body">
+   <div class="table-responsive">
+         <table class="table table-striped table-hover table-bordered">
+             <thead>
+                 <tr>
 
-                <th scope="col">{{ thead('media', 'name', 'nom') }}</th>
+                     <th scope="col">{{ thead('media', 'name', 'nom') }}</th>
 
-                <th scope="col">{{ thead('media', 'mediatype', 'Mediatype') }}</th>
+                     <th scope="col">{{ thead('media', 'mediatype', 'Mediatype') }}</th>
 
-                <th scope="col">{{ 'Actions'|trans({}, 'admin') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for media in paginator %}
-                <tr>
-                    <td><a href="{{ path('admin_medias_show', {id: media.id}) }}">{{ media.name }}</a></td>
+                     <th scope="col">{{ 'Actions'|trans({}, 'admin') }}</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 {% for media in paginator %}
+                     <tr>
+                         <td><a href="{{ path('admin_medias_show', {id: media.id}) }}">{{ media.name }}</a></td>
 
-                    <td>{{ media.mediatype }}</td>
-                   
-                    <td>
-                        <div class="btn-group">
-                            <a class="btn btn-default btn-sm" href="{{ path('admin_medias_show', {id: media.id}) }}">
-                                <i class="fa fa-file-o"></i> {{ 'show'|trans({}, 'admin') }}
-                            </a>
-                            <a class="btn btn-default btn-sm" href="{{ path('admin_medias_edit', {id: media.id}) }}">
-                                <i class="fa fa-edit"></i> {{ 'edit'|trans({}, 'admin') }}
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                         <td>{{ media.mediatype }}</td>
 
-    {{ knp_pagination_render(paginator) }}
+                         <td>
+                             <div class="btn-group">
+                                 <a class="btn btn-default btn-sm" href="{{ path('admin_medias_show', {id: media.id}) }}">
+                                     <i class="fa fa-file-o"></i> {{ 'show'|trans({}, 'admin') }}
+                                 </a>
+                                 <a class="btn btn-default btn-sm" href="{{ path('admin_medias_edit', {id: media.id}) }}">
+                                     <i class="fa fa-edit"></i> {{ 'edit'|trans({}, 'admin') }}
+                                 </a>
+                             </div>
+                         </td>
+                     </tr>
+                 {% endfor %}
+             </tbody>
+         </table>
+       </div>
 
-    <ul class="new_entry list-unstyled">
-        <li>
-            <a class="btn btn-info" href="{{ path('admin_medias_new') }}">
-                <i class="fa fa-plus"></i> {{ 'Create a new entry'|trans({}, 'admin') }}
-            </a>
-        </li>
-    </ul>
+   {{ knp_pagination_render(paginator) }}
 
+   <ul class="new_entry list-unstyled">
+       <li>
+           <a class="btn btn-info" href="{{ path('admin_medias_new') }}">
+               <i class="fa fa-plus"></i> {{ 'Create a new entry'|trans({}, 'admin') }}
+           </a>
+       </li>
+   </ul>
+ </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$().ready(function(){
+
+  $('#photosgallery').lightGallery( );
+  $('#videosgallery').lightGallery( );
+});
+</script>
 {% endblock %}

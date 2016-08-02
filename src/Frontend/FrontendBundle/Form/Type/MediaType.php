@@ -5,6 +5,7 @@ namespace Frontend\FrontendBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type as Type;
 
 class MediaType extends AbstractType
 {
@@ -15,11 +16,10 @@ class MediaType extends AbstractType
     {
         $builder
 
-            ->add('name')
-            ->add('file','file', array(
-            'data_class' => null,
-            'property_path' => 'file',
-             
+            ->add('name','text',array('label'=>'nom du média','required'=>false))
+            ->add('file','file', array('label'=>'fichier','required'=>false), array(
+            'data_class' => 'Symfony\Component\HttpFoundation\File\File',
+            'property_path' => 'file'
         ))
         ;
     }

@@ -51,17 +51,17 @@ class Article
     private $contenu;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Frontend\FrontendBundle\Entity\Media" , indexBy="id",cascade={ "persist","remove","detach"})
+    * @ORM\ManyToMany(targetEntity="Frontend\FrontendBundle\Entity\Media" , indexBy="id",fetch="EAGER",cascade={ "persist","detach"})
     * @ORM\JoinTable(name="articles_medias",
     *      inverseJoinColumns={@ORM\JoinColumn(name="mediaId", referencedColumnName="id")},
-    *      joinColumns={@ORM\JoinColumn(name="produitId", referencedColumnName="id")}
+    *      joinColumns={@ORM\JoinColumn(name="articleId", referencedColumnName="id")}
     *      )
   */
     private $medias;
 
     /**
     * @var Collection
-    * @ORM\OneToMany(targetEntity="Frontend\FrontendBundle\Entity\Comment", mappedBy="article")
+    * @ORM\OneToMany(targetEntity="Frontend\FrontendBundle\Entity\Comment", mappedBy="article", cascade={ "persist","remove"})
     * @ORM\JoinColumn(nullable = true)
     */
    private $comments;
@@ -203,6 +203,29 @@ class Article
     {
         return $this->medias;
     }
+    public function getPhotos(){
+      $photos = array();
+      foreach ($this->medias as $media) {
+
+        if($media->getMediatype()=='image'){
+          $photos[] = $media;
+        }
+      }
+
+      return $photos;
+    }
+
+    public function getVideos(){
+      $videos = array();
+      foreach ($this->medias as $media) {
+
+        if($media->getMediatype()=='video'){
+          $videos[] = $media;
+        }
+      }
+
+      return $videos;
+    }
 
     /**
      * Add comments
@@ -272,7 +295,7 @@ class Article
 
 
 
-   
+
 
     /**
      * Get updatedAt
@@ -293,6 +316,32 @@ class Article
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Article
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Article
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

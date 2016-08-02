@@ -2,6 +2,14 @@ admin_medias:
     pattern:  /
     defaults: { _controller: "FrontendBundle:MediaAdmin:index" }
 
+admin_medias_photos:
+    pattern:  /photos
+    defaults: { _controller: "FrontendBundle:MediaAdmin:photos" }
+
+admin_medias_videos:
+    pattern:  /videos
+    defaults: { _controller: "FrontendBundle:MediaAdmin:videos" }
+
 admin_medias_sort:
     pattern:  /{field}/{type}/sort
     defaults: { _controller: "FrontendBundle:MediaAdmin:sort" }

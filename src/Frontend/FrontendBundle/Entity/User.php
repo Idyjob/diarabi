@@ -60,6 +60,22 @@ class User extends BaseUser {
     */
     private $updatedAt;
 
+    /**
+    * @var Collection
+    * @ORM\OneToMany(targetEntity="Frontend\FrontendBundle\Entity\Comment", mappedBy="user", cascade={ "remove"})
+    * @ORM\JoinColumn(nullable = true)
+    */
+   private $comments;
+
+   /**
+   * @var Collection
+   * @ORM\OneToMany(targetEntity="Frontend\FrontendBundle\Entity\Likeable", mappedBy="user", cascade={ "remove"})
+   * @ORM\JoinColumn(nullable = true)
+   */
+   private $likes;
+
+
+
     public function __construct() {
         parent::__construct();
         $this->groups = new ArrayCollection();
@@ -199,5 +215,97 @@ $this->setLastActivity(new \DateTime());
     public function getLastActivity()
     {
         return $this->lastActivity;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return User
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Frontend\FrontendBundle\Entity\Comment $comments
+     * @return User
+     */
+    public function addComment(\Frontend\FrontendBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Frontend\FrontendBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Frontend\FrontendBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Add likes
+     *
+     * @param \Frontend\FrontendBundle\Entity\Likeable $likes
+     * @return User
+     */
+    public function addLike(\Frontend\FrontendBundle\Entity\Likeable $likes)
+    {
+        $this->likes[] = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Remove likes
+     *
+     * @param \Frontend\FrontendBundle\Entity\Likeable $likes
+     */
+    public function removeLike(\Frontend\FrontendBundle\Entity\Likeable $likes)
+    {
+        $this->likes->removeElement($likes);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }

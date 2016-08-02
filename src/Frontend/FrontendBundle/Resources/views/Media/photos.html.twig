@@ -1,0 +1,23 @@
+{% extends "::/layout/layoutadmin.html.twig" %}
+
+{% block title %}gallery photos{% endblock %}
+
+
+
+
+{% block body %}
+
+{% include 'FrontendBundle:Media:photosgallery.html.twig' with {photos: photos} %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$().ready(function(){
+
+  $('#photosgallery').lightGallery( );
+ 
+});
+</script>
+{% endblock %}

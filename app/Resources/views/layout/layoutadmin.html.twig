@@ -31,7 +31,7 @@
 
     <!-- Custom Fonts -->
     <link href="{{asset('admintemplate/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-
+    <link href="http://vjs.zencdn.net/5.8/video-js.min.css" type="text/css" rel="stylesheet">
       {% block stylesheets %}{% endblock %}
 
 </head>
@@ -76,9 +76,19 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{asset('admintemplate/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/js/confirm_pugx.js')}}"></script>
+    <script src="{{asset('/js/jquery.collection.js')}}"></script>
+    <script src="http://vjs.zencdn.net/5.8/video.min.js"></script>
 
-
-
+    <!--   light gallery-->
+    <script src="{{asset('js/lightgallery/dist/js/lightgallery.min.js') }}"></script>
+      <script src="{{asset('js/lightgallery/dist/js/lightgallery-all.min.js') }}"></script>
+    <script src="{{asset('js/lightgallery/dist/js/lg-thumbnail.min.js') }}"></script>
+    <script src="{{asset('js/lightgallery/dist/js/lg-fullscreen.min.js') }}"></script>
+    <!-- end light gallery -->
+    <!--   jsrouting bundle-->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <!-- end jsrouting bundle -->
     {%block javascripts%}{%endblock%}
 
 </body>

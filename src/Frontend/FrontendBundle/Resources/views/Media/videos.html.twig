@@ -1,0 +1,23 @@
+{% extends "::/layout/layoutadmin.html.twig" %}
+
+{% block title %}gallery videos{% endblock %}
+
+
+
+
+{% block body %}
+
+{% include 'FrontendBundle:Media:videosgallery.html.twig' with {videos: videos} %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$().ready(function(){
+
+
+  $('#videosgallery').lightGallery( );
+});
+</script>
+{% endblock %}

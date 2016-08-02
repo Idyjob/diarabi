@@ -5,6 +5,8 @@ namespace Frontend\FrontendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * Media
@@ -46,9 +48,15 @@ class Media
        * @ORM\Column(name="path", length=255, nullable=true)
        */
 
-      public $path;
+      private $path;
       /**
-      *@Gedmo\Timestampable(on="update")
+      *@Gedmo\Timestampable(on="create")
+      *@ORM\Column(name = "createted_at", type="datetime",nullable=true)
+      *
+      */
+      private $createtedAt;
+
+      /**
       *@ORM\Column(name = "updated_at", type="datetime",nullable=true)
       *
       */
@@ -71,15 +79,15 @@ class Media
 
       /**
         * @Assert\File(
-        *     maxSize = "1000M",
+        *     maxSize = "10000M",
         *     maxSizeMessage = "Fichier trop large",
-        *     notFoundMessage = "Image not Found.",
+        *     notFoundMessage = "fichier introuvable",
         *     mimeTypes = {"image/jpeg", "image/png","image/jpg", "image/gif","video/ogg", "video/mp4", "video/mp3"},
         *     mimeTypesMessage = "ce type de fichier n'est pas autorisé"
         * )
     */
 
-      public $file;
+      private $file;
 
       public function getUploadRootDir(){
 
@@ -226,6 +234,17 @@ class Media
     }
 
 
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+
 
     /**
      * Get mediatype
@@ -242,6 +261,21 @@ class Media
         return $this->mediaextension;
     }
 
+public function setFile($file){
+
+      $this->file = $file;
+
+      return $this;
+
+}
+public function getFile(){
+  if($this->path){
+    return new File($this->getAssetPath());
+  }else{
+    return null;
+  }
+
+}
 
     /**
      * Get mediasize

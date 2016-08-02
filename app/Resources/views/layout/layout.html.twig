@@ -120,16 +120,16 @@
                   </div>
               </div>
           </aside>
-
+          {% for flashMessage in app.session.flashbag.get('notice') %}
+          <div class="alert alert-danger col-sm-9 text-center  ">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ flashMessage }}</strong>
+          </div>
+          {% endfor %}
           <!--timeline-->
           <section class="timeline col-sm-9">
 
-            {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="alert alert-danger col-sm-9   ">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              <strong>{{ flashMessage }}</strong>
-            </div>
-            {% endfor %}
+
 
 
            {% block body %}{% endblock%}
@@ -199,6 +199,8 @@
         $("body").on("contextmenu",function(e){
           return false;
         });
+
+
       });
       </script>
 

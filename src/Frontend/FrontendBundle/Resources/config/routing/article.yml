@@ -1,0 +1,42 @@
+admin_articles:
+    pattern:  /
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:index" }
+
+addCommentArticle:
+    path:    /addCommentArticle/{id}
+    defaults: { _controller: FrontendBundle:ArticleAdmin:addCommentArticle }
+    methods:  [POST]
+    options:
+      expose: true
+
+admin_articles_sort:
+    pattern:  /{field}/{type}/sort
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:sort" }
+    requirements: { type: ASC|DESC }
+
+admin_articles_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:show" }
+
+admin_articles_new:
+    pattern:  /new
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:new" }
+
+admin_articles_create:
+    pattern:  /create
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:create" }
+    requirements: { _method: post }
+
+admin_articles_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:edit" }
+
+admin_articles_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:update" }
+    requirements: { _method: post|put }
+
+admin_articles_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FrontendBundle:ArticleAdmin:delete" }
+    requirements: { _method: post|delete }

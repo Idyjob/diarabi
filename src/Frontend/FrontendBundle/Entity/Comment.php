@@ -3,6 +3,7 @@
 namespace Frontend\FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Comment
@@ -29,17 +30,32 @@ class Comment
     private $contenu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\User",inversedBy="comments",cascade={ "detach"})
      * @ORM\JoinColumn(name="member_id",nullable= false)
      */
      private $user;
 
-    /**
-     * @var \DateTime
+     /**
+     *@Gedmo\Timestampable(on="create")
+     *@ORM\Column(name = "created_at", type="datetime",nullable=true)
      *
-     * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+     private $createdAt;
+
+     /**
+     * @var Collection
+     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\Article", inversedBy="comments", cascade={ "persist","detach"})
+     * @ORM\JoinColumn(nullable = true)
+     */
+     private $article;
+
+
+     /**
+     * @var Collection
+     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\Event", inversedBy="comments", cascade={ "persist","detach"})
+     * @ORM\JoinColumn(nullable = true)
+     */
+     private $event;
 
 
     /**
@@ -75,18 +91,7 @@ class Comment
         return $this->contenu;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Comment
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
 
-        return $this;
-    }
 
     /**
      * Get createdAt
@@ -114,10 +119,69 @@ class Comment
     /**
      * Get user
      *
-     * @return \Frontend\FrontendBundle\Entity\User 
+     * @return \Frontend\FrontendBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Comment
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set article
+     *
+     * @param \Frontend\FrontendBundle\Entity\Article $article
+     * @return Comment
+     */
+    public function setArticle(\Frontend\FrontendBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return \Frontend\FrontendBundle\Entity\Article
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * Set event
+     *
+     * @param \Frontend\FrontendBundle\Entity\Event $event
+     * @return Comment
+     */
+    public function setEvent(\Frontend\FrontendBundle\Entity\Event $event = null)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return \Frontend\FrontendBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 }

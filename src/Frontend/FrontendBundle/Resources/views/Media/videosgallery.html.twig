@@ -1,0 +1,15 @@
+
+{% if videos %}
+<div id="photosgallery">
+
+  {% for video in videos%}
+  <a href="{{asset(video.AssetPath)}}">
+    <video class="lg-video-object lg-html5 videocurrenttime" controls preload="none">
+        <source src="videos/video1.mp4" type="video/{{video.mediaextension}}">
+         Your browser does not support HTML5 video.
+    </video>
+  </a>
+ {%endfor%}
+
+</div>
+{%endif%}

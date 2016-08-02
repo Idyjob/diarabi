@@ -5,47 +5,60 @@
 {% block body %}
     <h1>User</h1>
 
-    <table class="table table-hover record_properties">
-        <tbody>
-            <tr>
-                <th scope="row">pseudo</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th scope="row">email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
+    <div class="panel panel-danger">
+       <div class="panel-heading">membre : {{user.username}}</div>
+       <div class="panel-body">
+          <div class="table-responsive">
+             <table class="table table-hover">
+                 <tbody>
+                   <tr>
+                       <th scope="row">gravatar</th>
+                       <td><img src="{{gravatar(user.email)}}"  /></td>
+                   </tr>
+                     <tr>
+                         <th scope="row">pseudo</th>
+                         <td>{{ user.username }}</td>
+                     </tr>
+                     <tr>
+                         <th scope="row">email</th>
+                         <td>{{ user.email }}</td>
+                     </tr>
+                     <tr>
 
-                {% if user.locked%}
-                <th scope="row" style="color:red;">Etat compte</th>
-                <td style="color:red;"><strong>compte bloqué</strong></td>
-                {%else%}
-                  <th scope="row" style="color:green;">Etat compte</th>
-                  <td style="color:green;"><strong>compte actif</strong></td>
-                {%endif%}
-            </tr>
-            <tr>
-                <th scope="row">groupes</th>
-                {% if user.groups%}
-                <td>{{ user.groups|join(', ') }}</td>
-                {%else%}
-                  <td>aucun groupe</td>
-                {%endif%}
-            </tr>
+                         {% if user.locked%}
+                         <th scope="row" style="color:red;">Etat compte</th>
+                         <td style="color:red;"><strong>compte bloqué</strong></td>
+                         {%else%}
+                           <th scope="row" style="color:green;">Etat compte</th>
+                           <td style="color:green;"><strong>compte actif</strong></td>
+                         {%endif%}
+                     </tr>
+                     <tr>
+                         <th scope="row">groupes</th>
+                         {% if user.groups%}
+                         <td>{{ user.groups|join(', ') }}</td>
+                         {%else%}
+                           <td>aucun groupe</td>
+                         {%endif%}
+                     </tr>
 
 
-            <tr>
-                <th scope="row">nb de connexion</th>
-                <td>{{ user.loginCount }}</td>
-            </tr>
-            <tr>
-                <th scope="row">dernière connexion</th>
-                <td>{{ user.lastLogin|date('d/m/y h:m') }}</td>
-            </tr>
+                     <tr>
+                         <th scope="row">nb de connexion</th>
+                         <td>{{ user.loginCount }}</td>
+                     </tr>
+                     <tr>
+                         <th scope="row">dernière connexion</th>
+                         <td>{{ user.lastLogin|date('d/m/y h:m') }}</td>
+                     </tr>
 
-        </tbody>
-    </table>
+                 </tbody>
+             </table>
+          </div>
+
+       </div>
+    </div>
+
 
     {{ form_start(delete_form) }}
         {{ form_widget(delete_form) }}

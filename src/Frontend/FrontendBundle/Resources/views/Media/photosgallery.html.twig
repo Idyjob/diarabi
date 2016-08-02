@@ -1,0 +1,12 @@
+
+{% if photos %}
+<div id="photosgallery">
+
+  {% for photo in photos%}
+  <a  href="{{photo.AssetPath|imagine_filter('large')}}">
+    <img src="{{photo.AssetPath|imagine_filter('medium')}}"  alt="{{photo.name}}"  />
+  </a>
+ {%endfor%}
+
+</div>
+{%endif%}

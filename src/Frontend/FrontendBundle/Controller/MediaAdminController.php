@@ -10,6 +10,7 @@ use Frontend\FrontendBundle\Form\Type\MediaType;
 use Frontend\FrontendBundle\Form\Type\MediaFilterType;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Media controller.
@@ -17,6 +18,35 @@ use Doctrine\ORM\QueryBuilder;
  */
 class MediaAdminController extends Controller
 {
+
+
+  public function photosAction(){
+    $em = $this->getDoctrine()->getManager();
+
+
+    $photos = $em->getRepository('FrontendBundle:Media')->findByMediatype('image');
+
+
+    return $this->render('FrontendBundle:Media:photos.html.twig', array(
+
+        'photos' => $photos,
+    ));
+
+  }
+  public function videosAction(){
+
+    $em = $this->getDoctrine()->getManager();
+
+
+    $videos = $em->getRepository('FrontendBundle:Media')->findByMediatype('video');
+
+
+            return $this->render('FrontendBundle:Media:videos.html.twig', array(
+
+        'videos' => $videos,
+    ));
+
+  }
     /**
      * Lists all Media entities.
      *
@@ -25,6 +55,7 @@ class MediaAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(new MediaFilterType());
+
         if (!is_null($response = $this->saveFilter($form, 'media', 'admin_medias'))) {
             return $response;
         }
@@ -33,6 +64,7 @@ class MediaAdminController extends Controller
                 return $this->render('FrontendBundle:Media:index.html.twig', array(
             'form'      => $form->createView(),
             'paginator' => $paginator,
+
         ));
     }
 
@@ -92,6 +124,8 @@ class MediaAdminController extends Controller
      */
     public function editAction(Media $media)
     {
+
+
         $editForm = $this->createForm(new MediaType(), $media, array(
             'action' => $this->generateUrl('admin_medias_update', array('id' => $media->getId())),
             'method' => 'PUT',
@@ -111,6 +145,10 @@ class MediaAdminController extends Controller
      */
     public function updateAction(Media $media, Request $request)
     {
+      $editedFile = new File($media->getAssetPath());
+
+      $media->setFile($editedFile);
+      //var_dump($media);die();
         $editForm = $this->createForm(new MediaType(), $media, array(
             'action' => $this->generateUrl('admin_medias_update', array('id' => $media->getId())),
             'method' => 'PUT',

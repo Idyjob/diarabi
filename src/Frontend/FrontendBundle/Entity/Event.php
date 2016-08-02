@@ -312,4 +312,30 @@ class Event
     {
         return $this->likes;
     }
+
+
+    public function getPhotos(){
+      $photos = array();
+      foreach ($this->medias as $media) {
+
+        if($media->getMediatype()=='image'){
+          $photos[] = $media;
+        }
+      }
+
+      return $photos;
+    }
+
+    public function getVideos(){
+      $videos = array();
+      foreach ($medias as $media) {
+
+        if($media->getMediatype()=='video'){
+          $videos[] = $media;
+        }
+      }
+
+      return $videos;
+    }
+
 }

@@ -5,57 +5,66 @@
 {% block body %}
     <h1>Media</h1>
 
-    <table class="table table-hover record_properties">
-        <tbody>
-          <tr>
 
-              {%if media.mediatype == 'image'%}
-              <td><img  src="{{media.AssetPath|imagine_filter('large')}}" class="img-responsive"   /></td>
-              {%else%}
-              <td>
-                <div   class="embed-responsive embed-responsive-16by9">
-                  <video preload autoplay class="embed-responsive-item" controls>
-                      <source src="{{asset(media.AssetPath)}}" type="video/{{media.mediaextension}}">
+    <div class="panel panel-success">
+      <div class="panel-heading">{{media.mediatype}}</div>
+      <div class="panel-body">
+
+        {%if media.mediatype == 'image'%}
+       <img  src="{{media.AssetPath|imagine_filter('large')}}" class="img-responsive"   /></td>
+        {%else%}
 
 
-                      Your browser does not support the video tag.
-                 </video>
 
-                  </div>
+        <div class="embed-responsive embed-responsive-4by3">
+          <video id="really-cool-video"   class="video-js vjs-default-skin embed-responsive-item videocurrenttime" controls
+           preload="auto"  
+           data-setup='{}'>
+           <source src="{{asset(media.AssetPath)}}" type="video/{{media.mediaextension}}">
+            <p class="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a web browser
+              that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+          </video>
+        </div>
+        {%endif%}
+
+        <table class="table table-hover record_properties">
+            <tbody>
 
 
-              </td>
-              {% endif%}
-          </tr>
+                <tr>
+                    <th scope="row">Nom</th>
+                    <td>{{ media.name }}</td>
+                </tr>
 
-            <tr>
-                <th scope="row">Nom</th>
-                <td>{{ media.name }}</td>
-            </tr>
+                <tr>
+                    <th scope="row">crée le</th>
+                    <td>{{ media.updatedAt|date('d/m/y h:m') }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Modifié le</th>
+                    <td>{{ media.updatedAt|date('d/m/y h:m') }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">extension</th>
+                    <td>.{{ media.mediaextension }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">type</th>
+                    <td>.{{ media.mediatype }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Taille</th>
+                    <td>{{ media.mediasize }}</td>
+                </tr>
 
-            <tr>
-                <th scope="row">crée le</th>
-                <td>{{ media.updatedAt|date('d/m/y h:m') }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Modifié le</th>
-                <td>{{ media.updatedAt|date('d/m/y h:m') }}</td>
-            </tr>
-            <tr>
-                <th scope="row">extension</th>
-                <td>.{{ media.mediaextension }}</td>
-            </tr>
-            <tr>
-                <th scope="row">type</th>
-                <td>.{{ media.mediatype }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Taille</th>
-                <td>{{ media.mediasize }}</td>
-            </tr>
+            </tbody>
+        </table>
 
-        </tbody>
-    </table>
+      </div>
+    </div>
+
 
     {{ form_start(delete_form) }}
         {{ form_widget(delete_form) }}
@@ -94,4 +103,16 @@
             </div>
         </div>
     </div>
+{%endblock %}
+
+{% block javascripts %}
+<script>
+$().ready(function(){
+  if($('.videocurrenttime').length > 0){
+    var video = document.querySelector('.videocurrenttime');
+    video.currentTime = 5;
+  }
+
+});
+</script>
 {% endblock %}
