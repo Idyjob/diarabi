@@ -3,8 +3,8 @@
 <div id="photosgallery">
 
   {% for photo in photos%}
-  <a  href="{{photo.AssetPath|imagine_filter('large')}}">
-    <img src="{{photo.AssetPath|imagine_filter('medium')}}"  alt="{{photo.name}}"  />
+  <a  href="{{photo.AssetPath|imagine_filter('large')}}" style="display:inline-block;">
+    <img src="{{photo.AssetPath|imagine_filter('medium')}}"  alt="{{photo.name}}"  class="photosgallery" />
   </a>
  {%endfor%}
 

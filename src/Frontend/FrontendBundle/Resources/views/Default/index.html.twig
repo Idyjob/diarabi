@@ -1,4 +1,9 @@
 {% extends "::/layout/layout.html.twig" %}
 {% block body%}
-Hello
+{% if articles and articles|length >0%}
+    {{app.request.session.get("locale")}}
+    {% for article in articles %}
+      {% include 'FrontendBundle:Article:display_article.html.twig' with {article: article} %}
+    {%endfor%}
+{% endif%}
 {% endblock%}

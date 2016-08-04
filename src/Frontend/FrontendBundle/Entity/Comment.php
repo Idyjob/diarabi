@@ -30,7 +30,7 @@ class Comment
     private $contenu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\User",inversedBy="comments",cascade={ "detach"})
+     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\User",inversedBy="comments",fetch="EAGER",cascade={ "detach"})
      * @ORM\JoinColumn(name="member_id",nullable= false)
      */
      private $user;
@@ -44,7 +44,7 @@ class Comment
 
      /**
      * @var Collection
-     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\Article", inversedBy="comments", cascade={ "persist","detach"})
+     * @ORM\ManyToOne(targetEntity="Frontend\FrontendBundle\Entity\Article", inversedBy="comments", cascade={ "detach"})
      * @ORM\JoinColumn(nullable = true)
      */
      private $article;

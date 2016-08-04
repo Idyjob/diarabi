@@ -67,6 +67,7 @@
 
     </div>
     <!-- /#wrapper -->
+      <div class="modalajax"><!-- Place at bottom of page --></div>
 
     <!-- jQuery -->
     <script src="{{asset('admintemplate/js/jquery.js')}}"></script>
@@ -89,6 +90,30 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <!-- end jsrouting bundle -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.5.3/jquery.timeago.min.js"></script>
+    <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
+    {% if app.request.session.get('_locale') == 'fr'%}
+    <script src="{{asset('js/jquery.timeago.fr.js') }}"></script>
+
+    {% else%}
+    <script src="{{asset('js/jquery.timeago.en.js') }}"></script>
+    {% endif%}
+      <script src="{{ asset('js/comment_article.js') }}"></script>
+    <script>
+    $().ready(function(){
+      $(document).on({
+       ajaxStart: function() { $('body').addClass("loading");    },
+       ajaxStop: function() { $('body').removeClass("loading"); }
+      });   
+      $('time.timeago').timeago();
+      if($('.videocurrenttime').length > 0){
+        var video = document.querySelector('.videocurrenttime');
+        video.currentTime = 5;
+      }
+
+    });
+    </script>
     {%block javascripts%}{%endblock%}
 
 </body>

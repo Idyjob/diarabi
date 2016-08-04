@@ -15,6 +15,7 @@ use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
+
 /**
  * Article controller.
  *
@@ -23,44 +24,40 @@ class ArticleAdminController extends Controller
 {
 
   /**
-  *
+  * add comment to article
   */
 
-  public function addCommentArticleAction($id){
+  public function deleteCommentArticleAction($id){
 
     $utilisateur = $this->get('security.context')->getToken()->getUser();
     $request = $this->getRequest();
 
-      if($request->getMethod() == 'POST' && $request->isXmlHttpRequest()){
-
-          $em = $this->getDoctrine()->getManager();
-          $comment = new Comment();
-          $comment->setUser($utilisateur);
-          $contenu = $request->request->get('comment');
-
-          $comment->setContenu($contenu);
-          $article = $em->getRepository('FrontendBundle:Article')->find($id);
-          $article->addComment($comment);
-          $comment->setArticle($article);
-          $em->persist($article);
-          $em->flush();
+      if($request->getMethod() == 'GET' && $request->isXmlHttpRequest()
+          &&
+          $this->get('security.context')->isGranted('ROLE_ADMIN')){
 
 
-          $json = json_encode(array(
-                'success' => $comment->getId() ,
+              $em = $this->getDoctrine()->getManager();
+              $comment = $em->getRepository('FrontendBundle:Comment')->find($id);
+              $em->remove($comment);
+              $em->flush();
+              $json = json_encode(array( 'success' => 'deleted'));
 
 
-            ));
 
-            $response = new Response();
-            $response->headers->set('Content-Type', 'application/json');
-            $response->setContent($json);
-            return $response;
+              $response = new Response( );
+
+              $response->headers->set('Content-Type', 'application/json');
+              $response->setStatusCode(200);
+              $response->setContent($json);
+              return $response;
+
+
+
+
       }
+}
 
-
-
-  }
     /**
      * Lists all Article entities.
      *

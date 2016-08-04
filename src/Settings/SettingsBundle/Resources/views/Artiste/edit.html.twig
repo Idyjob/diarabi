@@ -1,32 +1,28 @@
 {% extends "::/layout/layoutadmin.html.twig" %}
 
-{% block title %}Article - {{ parent() }}{% endblock %}
+{% form_theme edit_form 'FrontendBundle:Form:bootstrap_3_layout.html.twig' %}
 
-
-
+{% block title %}{{ '%entity% edit'|trans({'%entity%': 'Artiste'}, 'admin') }} - {{ parent() }}{% endblock %}
 
 {% block body %}
+    <h1>{{ '%entity% edit'|trans({'%entity%': 'Artiste'}, 'admin') }}</h1>
 
-
-    <h5>Article: <u>{{article.titre}}</u></h5>
-
-    <!--timeline-->
-    <section class="timeline col-sm-12">
-        {% include 'FrontendBundle:Article:display_article.html.twig' with {article: article} %}
-   </section>
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <p>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-edit"></i> {{ 'Edit'|trans({}, 'admin') }}</button>
+        </p>
+    {{ form_end(edit_form) }}
 
     {{ form_start(delete_form) }}
         {{ form_widget(delete_form) }}
 
         <div class="btn-group record_actions">
 
-            <a class="btn btn-info" href="{{ path('admin_articles') }}">
+            <a class="btn btn-info" href="{{ path('admin_artistes') }}">
                 <i class="fa fa-list"></i> {{ 'Back to the list'|trans({}, 'admin') }}
             </a>
 
-            <a class="btn btn-primary" href="{{ path('admin_articles_edit', {id: article.id}) }}">
-                <i class="fa fa-edit"></i> {{ 'Edit'|trans({}, 'admin') }}
-            </a>
             <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> {{ 'Delete'|trans({}, 'admin') }}</button>
 
         </div>
@@ -52,9 +48,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-
-{% block javascripts %}
-
 {% endblock %}

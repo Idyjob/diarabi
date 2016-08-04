@@ -54,7 +54,7 @@ class User extends BaseUser {
     private $createdAt;
 
     /**
-    *@Gedmo\Timestampable(on="update")
+    *@Gedmo\Timestampable(on="change", field={"password","username","email"})
     *@ORM\Column(name = "updated_at", type="datetime",nullable=true)
     *
     */
@@ -175,9 +175,22 @@ class User extends BaseUser {
         return $this;
     }
 
-    function setGroups(Collection $groups = null) {
-        if ($groups !== null)
+    // function setGroups(Collection $groups = null) {
+    //     if ($groups !== null){
+    //         $this->groups = $groups;
+    //     }else{
+    //         $this->groups = null;
+    //     }
+    //
+    // }
+
+    function setGroups(ArrayCollection $groups = null) {
+        if ($groups !== null){
             $this->groups = $groups;
+        }else{
+            $this->groups = null;
+        }
+
     }
 
     public function setRoles(array $roles = array()) {

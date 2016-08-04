@@ -1,0 +1,91 @@
+
+{% if article %}
+{% set comments = article.comments%}
+{% set photos = article.photos %}
+{% set videos = article.videos %}
+{% set likes = article.likes%}
+{% set article_id = article.id%}
+<!--post Timeline-->
+<div class="thumbnail thumbnail-post">
+    <!--caption-->
+    <div class="caption">
+        <div class="media">
+          <div class="media-left">
+            <a href="#" class="image-post">
+             <img src="{{gravatar('ishjallal@gmail.com')}}">
+            </a>
+          </div>
+          <div class="media-body">
+            <a class="media-heading title-post" href="#">{{article.titre}}</a>
+            <h5 class="time-post"><time class="timeago" datetime="{{article.createdAt|date}}"></time></h5>
+          </div>
+        </div>
+      <p> {{article.contenu|raw}}</p>
+      <p>
+      {% if videos and videos|length == 1%}
+       {% include 'FrontendBundle:Media:display_single_video.html.twig' with {media: videos|first} %}
+      {% endif%}
+      </p>
+      {% if photos and photos|length == 1%}
+      {% set media = photos|first%}
+      <p> <img  src="{{media.AssetPath|imagine_filter('large')}}" class="img-responsive" width="100%"  /></p>
+      {%else%}
+
+          {% include 'FrontendBundle:Media:photosgallery.html.twig' with {photos: photos} %}
+     
+      {% endif%}
+
+
+
+
+
+    </div><!--#caption-->
+    <div class="links-post">
+        <span class="fa fa-thumbs-o-up link-post"></span><a href="#" class="link-post" role="button">Like ({% if likes and likes|length > 0 %} {{likes|length}} {%else %} 0 {% endif%})</a>
+        <span class="fa fa-comment link-post"></span><a href="#" class="link-post" data-toggle="collapse" data-target=".allcomments_{{article.id}}" role="button">Comment <span id="comments_article_count_{{article.id}}">{% if comments and comments|length > 0%} {{comments|length}} {%else %} 0 {% endif%}<span>  </a>
+
+    </div>
+    <!--  all comments-->
+    <div id="{{article_id}}" class="collapse allcomments_{{article_id}}" >
+      <!-- commentform-->
+      <div class="media commentform">
+              <div class="media-left">
+                  <a href="#" class="image-post">
+                      <img src="{{gravatar('ishjallal@gmail.com')}}"   >
+                  </a>
+              </div>
+              <div class="media-body">
+
+                   <textarea id="{{article_id}}" placeholder="comment ..." class="facebookbordercolor commentinputarticle" style="width:100%"></textarea>
+              </div>
+        </div>
+      <!-- end commentform-->
+      {% if comments and comments|length > 0 %}
+      {% for comment in comments|reverse%}
+          <div class="media" id="comment_{{comment.id}}" >
+                  <div class="media-left">
+
+                      <a href="{{path('admin_users_show',{'id':comment.user.id})}}" class="image-post">
+                          <img src="{{gravatar(comment.user.email)}}"   >
+                      </a>
+                  </div>
+                  <div class="media-body">
+                      <h4 class="media-heading">
+                        <a href="{{path('admin_users_show',{'id':comment.user.id})}}" >{% if app.user and  comment.user.id == app.user.id%}Moi{%else%}{{comment.user.username}}{% endif%} </a> <small><i><time class="timeago" datetime="{{comment.createdAt|date}}"></time></i></small></h4>
+                        {% if app.user and is_granted('ROLE_ADMIN')%}
+                        <a href="#" class="deletecomment_article pull-right" id="{{comment.id}}"  aria-label="{{article_id}}">&times;</a>
+                        {% endif%}
+                      <p> {{comment.contenu}}</p>
+
+                  </div>
+            </div>
+            <hr/>
+
+    {% endfor%}
+    {%endif%}
+</div>
+    <!--  end all comments-->
+</div>
+
+<!--#post timeline-->
+{% endif%}

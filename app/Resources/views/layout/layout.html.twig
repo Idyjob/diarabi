@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %} diarabi {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="{% block motsCles %} {% endblock%}"       />
         <meta name="description" content="{% block description %} {% endblock%}"       />
         <link rel="icon" href="{{asset('img/favicon.ico')}}" />
@@ -16,12 +17,13 @@
         <!--   light gallery-->
         <link href="{{ asset('js/lightgallery/dist/css/lightgallery.min.css') }}" type="text/css" rel="stylesheet" />
         <!-- end light gallery -->
+        <link href="http://vjs.zencdn.net/5.8/video-js.min.css" type="text/css" rel="stylesheet">
 
 
         {% block stylesheets %}{% endblock %}
     </head>
     <body >
-      <nav class="navbar navbar-default" >
+      <nav class="navbar navbar-default " >
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header" >
@@ -92,11 +94,11 @@
         </div><!-- /.container-fluid -->
       </nav>
 
-      <div class="container"  >
+      <div class="container-fluid"  >
 
           <div class="col-sm-12">
 
-              <div class="thumbnail thumbnail-grand-profile">
+              <div class="thumbnail thumbnail-grand-profile" >
                 <!-- <img src="https://fr.wikipedia.org/wiki/Monument_de_la_Renaissance_africaine#/media/File:Le_Monument_de_la_Renaissance_africaine.jpg" style="width:100%;height:300px;background: #675E5E;"> -->
 
                   <img class="media-object" src="{{asset('/img/diarabi.jpg')}}" alt="" style="width:100%;height:300px;background: #675E5E;">
@@ -112,8 +114,8 @@
               </div>
           </div>
 
-          <aside class="col-sm-3">
-              <div class="panel panel-default">
+          <aside class="col-sm-3" >
+              <div class="panel panel-primary">
                   <div class="panel-heading">About</div>
                   <div class="panel-body">
                   Panel content
@@ -127,7 +129,7 @@
           </div>
           {% endfor %}
           <!--timeline-->
-          <section class="timeline col-sm-9">
+          <section class="timeline col-sm-6">
 
 
 
@@ -135,12 +137,21 @@
            {% block body %}{% endblock%}
         </section>
         <!--#timeline-->
+
+        <aside class="col-sm-3" >
+            <div class="panel panel-info">
+                <div class="panel-heading">About</div>
+                <div class="panel-body">
+                Panel content
+                </div>
+            </div>
+        </aside>
       </div><!--#container-->
 
-      <footer id="footer" class="vspace20 well">
-		<div class="container">
+      <!-- <footer id="footer" class="vspace20 well"> -->
+		<div class="container-fluid jumbotron">
 			<div class="row">
-				<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1 col-lg-4 col-lg-offset-1">
+				<div class="col-md-4">
 					<h4>{{'general_rules'|trans}}</h4>
           <ul class="nav nav-stacked">
             {% render(controller('SettingsBundle:Pages:menu'))%}
@@ -148,12 +159,12 @@
 					</ul>
 				</div>
 
-				<div class="col-md-4 col-xs-4 col-sm-4 col-lg-4">
+				<div class="col-md-4">
 					<h4>adresses</h4>
 					<p><i class="icon-map-marker"></i>&nbsp;Montpellier 34 000 - 10 rue des germain</p>
 				</div>
 
-				<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+				<div class="col-md-4">
 					<h4>contacts</h4>
 					<p><i class="icon-phone"></i>&nbsp;Tel: 06 18 18 58 70</p>
 					<p><i class="icon-print"></i>&nbsp;Fax: 06 18 18 58 70</p>
@@ -161,13 +172,13 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4 col-xs-4 col-sm-4 col-lg-4">
+				<div class="col-md-4">
 					<p>&copy; Copyright {{'now' | date('Y')}} - Diarabi</p>
 				</div>
 			</div>
 		</div>
-    <!-- <div class="modal"></div> -->
-	</footer>
+    <div class="modalajax"><!-- Place at bottom of page --></div>
+	<!-- </footer> -->
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 
@@ -193,12 +204,35 @@
 
       <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
       <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-      <script>
-      $().ready(function(){
 
+      <script src="http://vjs.zencdn.net/5.8/video.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.5.3/jquery.timeago.min.js"></script>
+      {% if app.request.session.get('_locale') == 'fr'%}
+      <script src="{{asset('js/jquery.timeago.fr.js') }}"></script>
+
+      {% else%}
+      <script src="{{asset('js/jquery.timeago.en.js') }}"></script>
+      {% endif%}
+      <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
+      <script src="{{ asset('js/comment_article.js') }}"></script>
+      <script>
+
+      $().ready(function(){
+      $('#photosgallery').lightGallery({download: false} );
+      $(document).on({
+       ajaxStart: function() { $('body').addClass("loading");    },
+       ajaxStop: function() { $('body').removeClass("loading"); }
+      });
+        $('time.timeago').timeago();
+        if($('.videocurrenttime').length > 0){
+          var video = document.querySelector('.videocurrenttime');
+          video.currentTime = 5;
+        }
         $("body").on("contextmenu",function(e){
           return false;
         });
+
+
 
 
       });

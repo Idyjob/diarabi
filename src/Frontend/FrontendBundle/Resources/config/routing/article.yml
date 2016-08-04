@@ -2,12 +2,13 @@ admin_articles:
     pattern:  /
     defaults: { _controller: "FrontendBundle:ArticleAdmin:index" }
 
-addCommentArticle:
-    path:    /addCommentArticle/{id}
-    defaults: { _controller: FrontendBundle:ArticleAdmin:addCommentArticle }
-    methods:  [POST]
+deleteCommentArticle:
+    path:    /deleteCommentArticle/{id}
+    defaults: { _controller: FrontendBundle:ArticleAdmin:deleteCommentArticle }
+    methods:  [GET]
     options:
       expose: true
+
 
 admin_articles_sort:
     pattern:  /{field}/{type}/sort

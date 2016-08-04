@@ -24,9 +24,10 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-           
+
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Settings\SettingsBundle\SettingsBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

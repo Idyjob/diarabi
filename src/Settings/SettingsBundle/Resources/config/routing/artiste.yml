@@ -1,0 +1,31 @@
+admin_artistes:
+    pattern:  /
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:index" }
+
+
+admin_artistes_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:show" }
+
+admin_artistes_new:
+    pattern:  /new
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:new" }
+
+admin_artistes_create:
+    pattern:  /create
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:create" }
+    requirements: { _method: post }
+
+admin_artistes_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:edit" }
+
+admin_artistes_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:update" }
+    requirements: { _method: post|put }
+
+admin_artistes_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SettingsBundle:ArtisteAdmin:delete" }
+    requirements: { _method: post|delete }

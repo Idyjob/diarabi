@@ -11,22 +11,12 @@
       <div class="panel-body">
 
         {%if media.mediatype == 'image'%}
-       <img  src="{{media.AssetPath|imagine_filter('large')}}" class="img-responsive"   /></td>
+       <img  src="{{media.AssetPath|imagine_filter('large')}}" class="img-responsive"   />
         {%else%}
 
 
 
-        <div class="embed-responsive embed-responsive-4by3">
-          <video id="really-cool-video"   class="video-js vjs-default-skin embed-responsive-item videocurrenttime" controls
-           preload="auto"  
-           data-setup='{}'>
-           <source src="{{asset(media.AssetPath)}}" type="video/{{media.mediaextension}}">
-            <p class="vjs-no-js">
-              To view this video please enable JavaScript, and consider upgrading to a web browser
-              that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-            </p>
-          </video>
-        </div>
+        {% include 'FrontendBundle:Media:display_single_video.html.twig' with {media: media} %}
         {%endif%}
 
         <table class="table table-hover record_properties">
@@ -104,15 +94,3 @@
         </div>
     </div>
 {%endblock %}
-
-{% block javascripts %}
-<script>
-$().ready(function(){
-  if($('.videocurrenttime').length > 0){
-    var video = document.querySelector('.videocurrenttime');
-    video.currentTime = 5;
-  }
-
-});
-</script>
-{% endblock %}

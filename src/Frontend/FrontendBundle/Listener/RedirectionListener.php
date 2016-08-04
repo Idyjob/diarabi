@@ -12,6 +12,7 @@ class RedirectionListener{
     $this->session = $session;
     $this->router = $container->get('router');
     $this->securityContext = $container->get('security.context');
+    $this->translator = $container->get('translator');
   }
 
   public function  onKernelRequest(GetResponseEvent $event){
@@ -20,7 +21,7 @@ class RedirectionListener{
     if($route && ($route == 'fos_user_security_login' || $route == 'fos_user_registration_register')){
 
       if(is_object($this->securityContext->getToken()->getUser())){
-        $this->session->getFlashBag()->add('notice','ok');
+        $this->session->getFlashBag()->add('notice',$this->translator->trans('alreadyconnected'));
         $event->setResponse(new RedirectResponse($this->router->generate('homepage')));
       }
       }

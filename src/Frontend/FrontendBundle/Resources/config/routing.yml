@@ -25,3 +25,13 @@ locale_language:
 admin_homepage:
     path:     /admin
     defaults: { _controller: FrontendBundle:Admin:index }
+
+
+
+
+addCommentArticle:
+    path:    /addCommentArticle/{id}
+    defaults: { _controller: FrontendBundle:Default:addCommentArticle }
+    methods:  [POST]
+    options:
+      expose: true

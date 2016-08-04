@@ -66,7 +66,18 @@
       </li>
 
 
+<li>
+    <a href="javascript:;" data-toggle="collapse" data-target="#artistes"><i class="fa fa-wikipedia-w" aria-hidden="true"></i> Ma biographie <i class="fa fa-fw fa-caret-down"></i> </a>
+    <ul id="artistes" class="collapse">
 
+        <li>
+            <a href="{{ path('admin_artistes') }}">liste</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_artistes_new') }}">Nouvelle biographie</a>
+        </li>
+    </ul>
+</li>
       <li>
           <a href="javascript:;" data-toggle="collapse" data-target="#pages"><i class="fa fa-fw fa-bar-chart-o" aria-hidden="true"></i> Conditions générales <i class="fa fa-fw fa-caret-down"></i></a>
           <ul id="pages" class="collapse">

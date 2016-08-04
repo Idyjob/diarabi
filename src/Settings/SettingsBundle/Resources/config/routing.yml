@@ -1,3 +1,9 @@
+settings_admin_artistes:
+    resource: "@SettingsBundle/Resources/config/routing/artiste.yml"
+    prefix:   /admin/artistes
+
+ 
+
 settings_admin_pages:
     resource: "@SettingsBundle/Resources/config/routing/pages.yml"
     prefix:   /admin/pages
