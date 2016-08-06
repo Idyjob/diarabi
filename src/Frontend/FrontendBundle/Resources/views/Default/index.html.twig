@@ -1,4 +1,5 @@
 {% extends "::/layout/layout.html.twig" %}
+
 {% block body%}
 {% if articles and articles|length >0%}
     {{app.request.session.get("locale")}}
@@ -7,3 +8,4 @@
     {%endfor%}
 {% endif%}
 {% endblock%}
+ 

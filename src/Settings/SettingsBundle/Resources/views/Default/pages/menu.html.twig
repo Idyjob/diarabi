@@ -1,5 +1,40 @@
-{%for page in pages%}
 
 
-<li><a href="{{path('page',{'slug':page.slug})}}">{{page.titre}}</a></li>
-{% endfor%}
+
+
+<div class="row">
+  <div class="col-md-4">
+    <h4>{{'general_rules'|trans}}</h4>
+    <ul class="nav nav-stacked">
+      {% if pages and pages|length > 0%}
+            {%for page in pages%}
+
+
+            <li><a href="{{path('page',{'slug':page.slug})}}">{{page.titre}}</a></li>
+            {% endfor%}
+
+      {% endif%}
+
+
+    </ul>
+  </div>
+  {% if artiste%}
+  <div class="col-md-4">
+    <h4>adresses</h4>
+    <p><i class="icon-map-marker"></i>&nbsp;{{artiste.adresse}}</p>
+  </div>
+
+  <div class="col-md-4">
+    <h4>contacts</h4>
+    <p><i class="icon-phone"></i>&nbsp;Tel: {{artiste.telephone}}</p>
+   
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>&copy; Copyright {{'now' | date('Y')}} - {{artiste.prenom}} &nbsp; {{artiste.nom}}</p>
+  </div>
+</div>
+
+  {% endif%}

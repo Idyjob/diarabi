@@ -1,0 +1,16 @@
+
+
+{%if artiste %}
+
+<img   src="{{artiste.media.AssetPath|imagine_filter('large')}}"  alt="{{artiste.prenom}} {{artiste.nom}}" style="width:90%;height:300px;background: #675E5E;">
+<div class="caption caption-grand-profile">
+<h3 class="title-grand-profile">{{artiste.prenom}} {{artiste.nom}}</h3>
+</div>
+
+{% else %}
+
+<img   src="{{gravatar('ishjallal@gmail.com')}}" alt="Diarabi" style="width:100%;height:300px;background: #675E5E;">
+<div class="caption caption-grand-profile">
+<h3 class="title-grand-profile">Diarabi</h3>
+</div>
+{%endif%}

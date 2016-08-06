@@ -4,8 +4,9 @@ namespace Frontend\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\FrontendBundle\Entity\Article;
- use Symfony\Component\HttpFoundation\Response;
-  use Symfony\Component\HttpFoundation\JsonResponse;
+use Frontend\FrontendBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Frontend\FrontendBundle\Entity\Comment;
 
 class DefaultController extends Controller
@@ -28,7 +29,8 @@ class DefaultController extends Controller
       $utilisateur = $this->get('security.context')->getToken()->getUser();
       $request = $this->getRequest();
 
-        if($request->getMethod() == 'POST' && $request->isXmlHttpRequest()){
+
+        if($request->getMethod() == 'POST' && $request->isXmlHttpRequest() && $utilisateur  instanceof User){
 
             $em = $this->getDoctrine()->getManager();
             $comment = new Comment();
@@ -51,7 +53,7 @@ class DefaultController extends Controller
 
 
               return $response;
-        }
+        }   
 }
 
 }

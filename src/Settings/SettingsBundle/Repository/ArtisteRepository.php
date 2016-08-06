@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArtisteRepository extends EntityRepository
 {
+  function getLastEntity() {
+    return $this->createQueryBuilder('e')->
+       orderBy('e.createdAt', 'DESC')->
+       setMaxResults(1)->
+       getQuery()->
+       getOneOrNullResult();
+  }
 }
