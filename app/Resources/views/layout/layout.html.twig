@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %} diarabi {% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+        <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
         <meta name="keywords" content="{% block motsCles %} {% endblock%}"       />
         <meta name="description" content="{% block description %} {% endblock%}"       />
         <link rel="icon" href="{{asset('img/favicon.ico')}}" />
@@ -22,7 +23,7 @@
 
         {% block stylesheets %}{% endblock %}
     </head>
-    <body >
+    <body style="background-image: url({{asset('img/background_image.jpg')}})">
       <nav class="navbar navbar-default " >
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -96,7 +97,7 @@
 
       <div class="container-fluid"  >
 
-          <div class="col-sm-12">
+          <div class="col-sm-12 mainprofile">
 
               <div class="thumbnail thumbnail-grand-profile" >
 
@@ -111,7 +112,7 @@
               </div>
           </div>
           {% block leftcolumn %}
-          <aside class="col-sm-3" >
+          <aside class="col-sm-3 mainleft" >
               <div class="panel panel-primary">
                   <div class="panel-heading">About</div>
                   <div class="panel-body">
@@ -127,16 +128,12 @@
           </div>
           {% endfor %}
           <!--timeline-->
-          <section class="timeline col-sm-6">
-
-
-
-
-           {% block body %}{% endblock%}
-        </section>
+              <section class="timeline col-sm-6 mainbody">
+                    {% block body %}{% endblock%}
+              </section>
         <!--#timeline-->
         {% block rightcolumn %}
-        <aside class="col-sm-3" >
+        <aside class="col-sm-3 mainright" >
             <div class="panel panel-info">
                 <div class="panel-heading">About</div>
                 <div class="panel-body">

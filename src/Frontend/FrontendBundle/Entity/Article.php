@@ -68,7 +68,7 @@ class Article
 
    /**
    * @var Collection
-   * @ORM\OneToMany(targetEntity="Frontend\FrontendBundle\Entity\Likeable", mappedBy="article")
+   * @ORM\OneToMany(targetEntity="Frontend\FrontendBundle\Entity\Likeable", mappedBy="article", cascade={ "persist","remove"})
    * @ORM\JoinColumn(nullable = true)
    */
    private $likes;
@@ -291,6 +291,26 @@ class Article
     public function getLikes()
     {
         return $this->likes;
+    }
+
+    /**
+    * check wether current user like the article
+    *
+    */
+    public function doesCurrentUserLike($user){
+
+      $result = false;
+      if($user){
+      foreach ($this->likes as $like) {
+
+        if($like->getUser()->getId()==$user->getId()){
+          $result = true;
+          break;
+        }
+      }
+    }
+      return $result;
+
     }
 
 

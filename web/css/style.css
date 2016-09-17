@@ -216,6 +216,9 @@ body.loading .modalajax {
 }
 img.photosgallery{
 	display: inline-block;
-	max-width: inherit;
-	width: 285px;
+
+	 width: 267px;
+}
+.pointcursor{
+	cursor: pointer;
 }

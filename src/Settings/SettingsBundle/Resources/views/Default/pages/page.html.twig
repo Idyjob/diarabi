@@ -4,9 +4,17 @@
 {% block body %}
 
 
-                    <h4>{{page.titre}}</h4>
+<div class="panel panel-danger">
+  <div class="panel-heading text-center">{{page.titre}}</div>
+  <div class="panel-body">{{page.contenu|raw}}</div>
 
-                  <p>{{page.contenu|raw}}</p>
-			 
+</div>
+
 
 {%endblock%}
+{% block javascripts%}
+
+<script src="{{asset('js/layout_animation.js')}}"></script>
+
+
+{% endblock%}

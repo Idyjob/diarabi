@@ -1,0 +1,21 @@
+{% extends "::/layout/layout.html.twig" %}
+{% block title %} {{article.titre}} {% endblock %}
+{% block motsCles %} {{article.titre}}{% endblock%}
+{% block description %} {{article.titre}}{% endblock%}
+{% block body%}
+{% if article  %}
+
+
+
+    <div class="well">
+      {% include 'FrontendBundle:Article:display_article.html.twig' with {article: article} %}
+   </div>
+
+{% endif%}
+{% endblock%}
+{% block javascripts%}
+
+<script src="{{asset('js/layout_animation.js')}}"></script>
+
+
+{% endblock%}

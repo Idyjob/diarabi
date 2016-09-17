@@ -1,7 +1,7 @@
 {% extends "::/layout/layout.html.twig" %}
 {%block body %}
 
-<div class="timeline col-sm-12">
+<div class="timeline col-sm-12 well">
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
@@ -18,3 +18,9 @@
             {% endblock fos_user_content %}
        </div>
   {%endblock%}
+  {% block javascripts%}
+
+  <script src="{{asset('js/layout_animation.js')}}"></script>
+
+
+  {% endblock%}

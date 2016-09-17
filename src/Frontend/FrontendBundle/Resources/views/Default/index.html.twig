@@ -2,10 +2,12 @@
 
 {% block body%}
 {% if articles and articles|length >0%}
-    {{app.request.session.get("locale")}}
+
     {% for article in articles %}
+
+    <div class="well">
       {% include 'FrontendBundle:Article:display_article.html.twig' with {article: article} %}
+   </div>
     {%endfor%}
 {% endif%}
 {% endblock%}
- 

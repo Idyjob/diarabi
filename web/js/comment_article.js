@@ -33,6 +33,31 @@ function escapeHtml(unsafe) {
     var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute;
      return dateTime;
 }
+
+function addLikeArticle(id){
+  //addCommentArticle
+
+  $.ajax({
+    type: "GET",
+    url : Routing.generate('addLikeArticle', {id:id}),
+
+    error: function(error)
+            {
+            alert(error);
+          },
+    success: function(data){
+      var likeCount = $('#likes_article_count_'+id).text();
+      likeCount = parseInt(likeCount);
+
+
+      $('#likes_article_count_'+id).text(likeCount + 1);
+      $('span#'+id).hide(2000,function(){
+        $(this).remove();
+      });
+    }
+
+        });
+}
 function addCommentArticle(id,comment){
   comment = escapeHtml(comment);
   $.ajax({
@@ -61,7 +86,7 @@ function addCommentArticle(id,comment){
           +'</div>'
     +'</div>';
 
-    $('.allcomments_'+id).prepend(newComment).html();
+    $('.allcomments_'+id).prepend(newComment).html().fadeIn(2000);
 
     commentCount = parseInt(commentCount);
     $('#comments_article_count_'+id).text(commentCount + 1);
@@ -92,7 +117,7 @@ function addCommentArticle(id,comment){
                    },
                   success: function(data){
 
-                    $('div#comment_'+id).remove();
+                    $('div#comment_'+id).hide(2000, function(){$(this).remove();});
                     var commentCount = $('#comments_article_count_'+currentArticle).text();
                     commentCount = parseInt(commentCount);
 
@@ -105,7 +130,7 @@ function addCommentArticle(id,comment){
   }
 
 
-
+// ajax add comment
 $("textarea.commentinputarticle").keypress(function(event) {
   if (event.which == 13) {
       event.preventDefault();
@@ -116,12 +141,21 @@ $("textarea.commentinputarticle").keypress(function(event) {
       addCommentArticle(id,comment);
   }
 });
-
+// ajax delete comment
 $('a.deletecomment_article').click(function(e){
   e.preventDefault();
 
   var id = $(this).attr('id');
   var currentArticle = $(this).attr('aria-label');
   deleteCommentArticle(id,currentArticle);
+
+});
+
+// ajax like
+
+$('span.likebutton').click(function(e){
+  e.preventDefault();
+  var id = $(this).attr('id');
+  addLikeArticle(id);
 
 });
